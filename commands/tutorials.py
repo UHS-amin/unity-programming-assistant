@@ -31,6 +31,8 @@ class TutorialsSource(menus.ListPageSource):
 			)
 			entries = cast(Sequence, self.entries)
 			embed.set_footer(text=f'({self.results / (entries.index(page) or 0) + 1}/{self.results or 0}) Results | Page ({(entries.index(page) or 0) + 1/len(entries)})')
+			return embed
+		return page
 
 class MyMenuPages(menus.MenuPages):
     def __init__(self, source):
@@ -44,7 +46,7 @@ class MyMenuPages(menus.MenuPages):
         self.ctx = ctx
         page = await self._source.get_page(0)
         kwargs = cast(Dict[str, Any], await self._get_kwargs_from_page(page))
-        self.message = await cast(commands.Context, self.ctx).reply(**kwargs)
+        self.message = await cast(commands.Context, self.ctx).message.reply(**kwargs)
 
 @commands.group(invoke_without_command=True)
 async def tutorials(ctx: commands.Context):
@@ -106,4 +108,4 @@ async def list(ctx: commands.Context, topic: Optional[str] = None):
 				splitted = cont.split('\n')
 				if len(splitted) > 8:
 					splitted = [splitted[i:i+8] for i in range(0, len(splitted), 8)]
-					Pagin
+					print(splitted)
