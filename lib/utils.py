@@ -17,7 +17,7 @@ def getResultsNumFrom2D(res: List, pos = 1):
             _sum += len(res[i]) if res[i] is not None and isinstance(res[i], List) else 0
         return [total, _sum]
     else:
-        return 0
+        return [0, 0]
 
 def gt2d(l: List):
     return getTotalOf2D(l)
